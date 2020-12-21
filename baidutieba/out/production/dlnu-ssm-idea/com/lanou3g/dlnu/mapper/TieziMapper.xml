@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- mapper文件，可以理解为映射文件 -->
+<!-- namespace后是接口文件的全路径类名（包名+类名） -->
+<mapper namespace="com.lanou3g.dlnu.mapper.TieziMapper">
+
+
+
+<!--id是序号，name是用户名，money是密码 -->
+
+	<insert id="insertTiezi" parameterType="tiezi">
+		insert into `tiezi`
+		values(null,#{tiezineirong},#{flag1},#{flag2})
+	</insert>
+	
+	<select id="selectAllTiezi" resultType="tiezi">
+		select * from `tiezi`
+
+	</select>
+
+	<select id="selectXiandingTiezi" parameterType="Tiezi" resultType="tiezi">
+		select * from `tiezi`
+		WHERE
+		flag1=#{flag1};
+
+	</select>
+
+	<!--佛哭了,这语言叫Mybatis,wdnmd-->
+	<!--没错，这个地方才是真正的Mapper层，用于调取mysql数据库的数据
+	返回数据的类型由resulttype决定-->
+	<select id="selectname" parameterType="tiezi" resultType="tiezi">
+		select * from `tiezi`
+		WHERE
+		tiezineirong=#{tiezineirong};
+
+	</select>
+
+	<select id="selectoneTiezi" parameterType="tiezi" resultType="tiezi">
+		select*from `tiezi`
+		WHERE
+		tiezineirong=#{tiezineirong}
+
+	</select>
+
+
+
+	<delete id="deleteTiezi" parameterType="int">
+		DELETE FROM
+			`tiezi`
+		WHERE
+			id=#{id}
+	</delete>
+
+	<update id="updateTiezi" parameterType="tiezi">
+		UPDATE `tiezi`
+		SET
+			tiezineirong=#{tiezineirong}
+		WHERE
+			id=#{id}
+	</update>
+
+</mapper>

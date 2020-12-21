@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/jdbc 
+    http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 读取jdbc.properties文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+	<!-- 配置数据库连接池 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClass}"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+	</bean>
+	
+	
+	
+	<!-- 配置一个SqlSessionFactoryBean -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 配置configLocation属性，值就是mybatis的配置文件位置 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+		<!-- 配置数据库连接池 -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 配置POJO的别名 -->
+		<property name="typeAliasesPackage" value="com.lanou3g.dlnu.pojo"/>
+	</bean>
+
+	
+	<!-- MapperScannerConfigurer用来配置多个Mapper -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 将basePackage中所有的mapper装配到spring容器 -->
+  		<property name="basePackage" value="com.lanou3g.dlnu.mapper" />
+	</bean>
+	
+	
+	
+</beans>

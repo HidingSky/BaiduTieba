@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- mapper文件，可以理解为映射文件 -->
+<!-- namespace后是接口文件的全路径类名（包名+类名） -->
+<mapper namespace="com.lanou3g.dlnu.mapper.TestMapper">
+
+	<!-- select标签，中间写SQL -->
+	<!-- 标签属性
+		id:对应的接口文件方法名
+		resultType: 对应接口文件的返回值类型(string对应的String)
+		parameterType: 对应接口文件的参数类型
+	-->
+	<select id="now" resultType="string">
+		select now()
+	</select>
+
+</mapper>

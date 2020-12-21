@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- mapper文件，可以理解为映射文件 -->
+<!-- namespace后是接口文件的全路径类名（包名+类名） -->
+<mapper namespace="com.lanou3g.dlnu.mapper.HeroMapper">
+
+
+
+<!--id是序号，name是用户名，money是密码 -->
+
+	<insert id="insertHero" parameterType="hero">
+		insert into `hero`
+		values(null,#{name},#{money})
+	</insert>
+	
+	<select id="selectAllHero" resultType="hero">
+		select * from `hero`
+
+	</select>
+
+	<!--佛哭了,这傻逼语言叫Mybatis，但是没人告诉我,wdnmd-->
+	<!--没错，这个地方才是真正的Mapper层，用于调取mysql数据库的数据
+	返回数据的类型由resulttype决定-->
+	<select id="selectname" parameterType="hero" resultType="hero">
+		select * from `hero`
+		WHERE
+		name=#{name};
+
+	</select>
+
+	<select id="selectoneHero" parameterType="hero" resultType="hero">
+		select*from `hero`
+		WHERE
+		name=#{name} AND money=#{money};
+
+	</select>
+
+
+
+	<delete id="deleteHero" parameterType="int">
+		DELETE FROM
+			`hero`
+		WHERE
+			id=#{id}
+	</delete>
+
+	<update id="updateHero" parameterType="hero">
+		UPDATE `hero`
+		SET
+			name=#{name},money=#{money}
+		WHERE
+			id=#{id}
+	</update>
+
+</mapper>

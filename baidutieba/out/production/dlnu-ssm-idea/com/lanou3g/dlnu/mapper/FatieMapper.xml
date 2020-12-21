@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- mapper文件，可以理解为映射文件 -->
+<!-- namespace后是接口文件的全路径类名（包名+类名） -->
+<mapper namespace="com.lanou3g.dlnu.mapper.FatieMapper">
+
+
+
+<!--id是序号，name是用户名，money是密码 -->
+
+	<insert id="insertFatie" parameterType="fatie">
+		insert into `fatie`
+		values(null,#{biaoti},#{neirong},#{flag1},#{flag2})
+	</insert>
+	
+	<select id="selectAllFatie" parameterType="fatie" resultType="fatie">
+		select * from `fatie`
+		WHERE
+		flag1=#{flag1}
+	</select>
+
+
+	<!--佛哭了,这傻逼语言叫Mybatis，但是没人告诉我,wdnmd-->
+	<!--没错，这个地方才是真正的Mapper层，用于调取mysql数据库的数据
+	返回数据的类型由resulttype决定-->
+	<select id="selectname" parameterType="fatie" resultType="fatie">
+		select * from `fatie`
+		WHERE
+		biaoti=#{biaoti};
+
+	</select>
+
+	<select id="selectoneFatie" parameterType="fatie" resultType="fatie">
+		select*from `fatie`
+		WHERE
+		flag1=#{flag1}
+
+	</select>
+
+
+
+	<delete id="deleteHero" parameterType="int">
+		DELETE FROM
+			`hero`
+		WHERE
+			id=#{id}
+	</delete>
+
+	<update id="updateFatie" parameterType="fatie">
+		UPDATE `fatie`
+		SET
+			biaoti=#{biaoti},neirong=#{neirong},flag1={flag1}
+		WHERE
+			id=#{id}
+	</update>
+
+</mapper>
